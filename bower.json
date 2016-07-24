@@ -1,0 +1,22 @@
+{
+  "name": "jazzy",
+  "description": "управляй css3 анимациями легко, easy to control the css3 animation",
+  "main": "index.js",
+  "authors": [
+    "Mike <ellokopoko@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "animation",
+    "control animation"
+  ],
+  "homepage": "https://github.com/Talalaev/Jazzy.git",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

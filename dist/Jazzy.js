@@ -189,7 +189,8 @@ var Jazzy =
 
 	Jazzy.addClass = helpers.addClass;
 	Jazzy.removeClass = helpers.removeClass;
-	Jazzy.createSwitchShowing = __webpack_require__(3);
+	Jazzy.createAnimation = __webpack_require__(3);
+	Jazzy.createSwitchShowing = __webpack_require__(4);
 
 	module.exports = Jazzy;
 
@@ -210,6 +211,35 @@ var Jazzy =
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	module.exports = function createAnimation(options) {
+	    options.animationName = options.animationName || options.name;
+	    options.state = options.state !== false ? options.name : false;
+	    return new Jazzy(options.el, [{
+	        name: options.name,
+	        rightNow: function rightNow(el) {
+	            Jazzy.addClass(el, options.animationName);
+	        },
+	        afterDelay: function afterDelay(el) {},
+	        afterAnimation: function afterAnimation(el) {
+	            Jazzy.removeClass(el, options.animationName);
+	            console.timeEnd("animationShow");
+	        },
+	        allowRestart: options.restart,
+	        delay: 0,
+	        events: options.flux ? {
+	            rightNow: ["start"],
+	            afterDelay: ["afterDelay"],
+	            afterAnimation: ["end"]
+	        } : undefined
+	    }], options.state, options.flux);
+	};
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 	"use strict";

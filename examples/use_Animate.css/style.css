@@ -42,7 +42,7 @@ body {
 #my_animated_element, #my_simple_animated_element {
   border: 1px dashed #ddd;
   display: block;
-  margin: 0 auto;
+  margin: 60px auto;
   width: 126px;
   padding: 80px;
   background: #fff;
@@ -59,4 +59,23 @@ body {
 }
 .hide {
   display: none !important;
+}
+
+
+#buttons {
+    bottom: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    width: 30%;
+}
+#buttons ul {
+    list-style: outside none none;
+    margin: 10px;
+    padding: 0;
+}
+#buttons .header {
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    margin: 15px 0;
 }

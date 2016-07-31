@@ -141,6 +141,7 @@ var helpers = require('./helpers');
 
 Jazzy.addClass = helpers.addClass;
 Jazzy.removeClass = helpers.removeClass;
+Jazzy.createAnimation = require('./factories/createAnimation');
 Jazzy.createSwitchShowing = require('./factories/createSwitchShowing');
 
 module.exports = Jazzy;

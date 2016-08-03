@@ -60,3 +60,16 @@ body {
 .hide {
   display: none !important;
 }
+#events {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    overflow: auto;
+}
+.events-log {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

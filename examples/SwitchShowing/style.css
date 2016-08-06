@@ -69,8 +69,6 @@ hr {
   display: none !important;
 }
 .events {
-    max-height: 206px;
-    overflow: auto;
 }
 .col-half {
     float: left;

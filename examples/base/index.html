@@ -6,25 +6,71 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    
+    <div class="container">
+        <h1>Base</h1>
+        
+        <h2>Предназначение</h2>
+        <p>
+            Предназначение плагина заключается в генерировании потока событий анимации. Создавая анимацию с помощью Jazzy вы можете передать ссылку на flux. Под flux понимается поток или шина событий в архитектуре когда компоненты интерфейса не знают друг о друге, а общение между компонентами происходит через flux ( шину, глобальные диспетчер ). Например, один компонент загружает данные и как только загрузит отправит сообщение "load" во flux. Flux в свою очередь отправит уведомление всем компонентам которые подписались на события "load".
+        </p>
+        <p>
+            Таким образом Jazzy делает всю работу по отслеживанию и генерированию событий за вас, так же Jazze умеет прерыват анимацию на пол пути если будет вызвана протовоположная анимаци (показать, спрятать).
+            Генерируется три типа событий:
+        </p>
+        <ul>
+            <li>Запуск - происходит сразу после вызова метода.</li>
+            <li>Задержка завершена - происходи сразу после задержки. (!!! сноска !!!)</li>
+            <li>Окончание анимации</li>
+        </ul>
+        
+        <h2>Внимание</h2>
+        <p>
+            !!!! Jazzy не поддерживает задежки в css3! т.е. при использовании Jazzy в случае если нужна задержка перед воспроизведение анимации используйте специальное свойство delay !!!!
+        </p>
+        <p>
+            !!!! Передаваемый flux должен реализовывать метод emit для генерации событий, потому что именно его и будет вызывать Jazzy !!!!
+        </p>
+        
+        <h2>Пример</h2>
+        <p>
+            Рассмотрим на примере каким образом пользоваться плагином на продвинутом уровне. Предположим нам нужно сделать анимацию для показа уведомления ( alert ). Т.е. анимацию для обычного alert.
+        </p>
+        <p>
+            У любого анимированного alert должно быть две анимации. Первая для появления и вторая для скрытия. Так как ситуация когда нужно, что-то показать, а потом спрятать достаточно типична плагин предоставляет специальную фабрику Jazzy.createSwitchShowing.
+        </p>
+        <p>
+            Ниже приведена реализация данной задачи при помощи полного описания и при помощи фабрики Jazzy.createSwitchShowing.
+        </p>
+        <p>
+            Обратите внимание, что задача скрытия и показа для первого и второго случая отличается тем, что в расширенном описание мы разрешаем повторное воспроизведение анимации показа.
+        </p>
+    </div>
    
     <div class="container">
         <h3>the simple to use</h3>
-        <div class="actions">
-          <button id="simple_show">show</button>
-          <button id="simple_hide">hide</button>
+        <div class="example col-half">
+            <div class="actions">
+              <button id="simple_show">show</button>
+              <button id="simple_hide">hide</button>
+            </div>
+            <div id="my_simple_animated_element" class="jazzy">
+              Some context here!
+            </div>
         </div>
-        <div id="my_simple_animated_element" class="jazzy">
-          Some context here!
-        </div>
-    </div>
-    <div class="container">
-        <div class="events events_simple-use">
+        <div class="events events_simple-use col-half">
             <button class="clear-log">clear</button>
             <ul class="events-log">
                 <li>example log</li>
             </ul>
         </div>
-        <div class="code">
+    </div>
+    
+    <div class="container">
+        <div class="note col-half">
+            bla bla
+        </div>
+        <div class="code col-half">
             var simpleCreate = Jazzy.createSwitchShowing({
                 el: document.getElementById("my_simple_animated_element"),
                 state: "show",
@@ -43,27 +89,34 @@
         </div>
     </div>
     
+    
     <hr>
+    
     
     <div class="container">
         <h3>advanced use</h3>
-        <div>
-          <button id="show">show</button>
-          <button id="hide">hide</button>
+        <div class="example col-half">
+            <div>
+              <button id="show">show</button>
+              <button id="hide">hide</button>
+            </div>
+            <div id="my_animated_element" class="jazzy">
+              Some context here!
+            </div>
         </div>
-        <div id="my_animated_element" class="jazzy">
-          Some context here!
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="events">
+        <div class="events col-half">
             <button class="clear-log">clear</button>
             <ul class="events-log">
                 <li>example log</li>
             </ul>
         </div>
-        <div class="code">
+    </div>
+    
+    <div class="container">
+        <div class="note col-half">
+            bla bla
+        </div>
+        <div class="code col-half">
             var jazzy = new Jazzy(
                 document.getElementById("my_animated_element"),
                 [
@@ -122,7 +175,6 @@
                 "show",
                 flux
             );
-            </span>
         </div>
     </div>
     

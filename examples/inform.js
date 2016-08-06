@@ -1,4 +1,4 @@
-var events = document.getElementsByClassName("events_simple-use")[0],
+var events = document.getElementsByClassName("events")[0],
     log = events.getElementsByClassName("events-log")[0],
     buttonClear = events.getElementsByClassName("clear-log")[0];
 

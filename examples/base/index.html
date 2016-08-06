@@ -7,7 +7,46 @@
 </head>
 <body>
    
-    <div style="height: 204px;">
+    <div class="container">
+        <h3>the simple to use</h3>
+        <div class="actions">
+          <button id="simple_show">show</button>
+          <button id="simple_hide">hide</button>
+        </div>
+        <div id="my_simple_animated_element" class="jazzy">
+          Some context here!
+        </div>
+    </div>
+    <div class="container">
+        <div class="events events_simple-use">
+            <button class="clear-log">clear</button>
+            <ul class="events-log">
+                <li>example log</li>
+            </ul>
+        </div>
+        <div class="code">
+            var simpleCreate = Jazzy.createSwitchShowing({
+                el: document.getElementById("my_simple_animated_element"),
+                state: "show",
+                animationName: {
+                    show: "showLeft",
+                    hide: "hideLeft"
+                }
+            });
+            <span class="code-coment">
+            /*
+                Теперь вам доступны два метода SHOW и HIDE
+                simpleCreate.show();
+                simpleCreate.hide();
+            */
+            </span>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div class="container">
+        <h3>advanced use</h3>
         <div>
           <button id="show">show</button>
           <button id="hide">hide</button>
@@ -17,21 +56,74 @@
         </div>
     </div>
     
-    <div style="height: 204px;">
-        <div>
-          <button id="simple_show">simple show</button>
-          <button id="simple_hide">simple hide</button>
+    <div class="container">
+        <div class="events">
+            <button class="clear-log">clear</button>
+            <ul class="events-log">
+                <li>example log</li>
+            </ul>
         </div>
-        <div id="my_simple_animated_element" class="jazzy">
-          Some context here!
+        <div class="code">
+            var jazzy = new Jazzy(
+                document.getElementById("my_animated_element"),
+                [
+                    {
+                        name: "show",
+                        rightNow: function(el) {
+                            Jazzy.addClass(el, "showLeft");
+                            Jazzy.addClass(el, "hide");
+                        },
+                        afterDelay: function(el) {
+                            Jazzy.removeClass(el, "hide");
+                        },
+                        afterAnimation: function(el) {
+                            Jazzy.removeClass(el, "showLeft");
+                            console.timeEnd("animationShow");
+                        },
+                        cancelActions: [
+                            {
+                                name: "hide",
+                                removeClass: ["hideLeft"]
+                            }
+                        ],
+                        allowRestart: true,
+                        delay: 0,
+                        events: {
+                            rightNow: ["show:start"],
+                            afterDelay: ["show:afterDelay"],
+                            afterAnimation: ["show:end"]
+                        }
+                    },
+                    {
+                        name: "hide",
+                        rightNow: function(el) {
+
+                        },
+                        afterDelay: function(el) {
+                            Jazzy.addClass(el, "hideLeft");
+                        },
+                        afterAnimation: function(el) {
+                            Jazzy.addClass(el, "hide");
+                            Jazzy.removeClass(el, "hideLeft");
+                            console.timeEnd("animationHide");
+                        },
+                        cancelActions: [
+                            {
+                                name: "show",
+                                removeClass: ["showLeft"]
+                            }
+                        ],
+                        delay: 0,
+                        events: {
+                            afterAnimation: ["hide:end"]
+                        }
+                    }
+                ],
+                "show",
+                flux
+            );
+            </span>
         </div>
-    </div>
-    
-    <div id="events">
-        <button class="clear-log">clear</button>
-        <ul class="events-log">
-            <li>example log</li>
-        </ul>
     </div>
     
     <script type="text/javascript" src="../../dist/Jazzy.js"></script>

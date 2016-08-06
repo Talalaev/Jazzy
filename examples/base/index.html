@@ -32,7 +32,57 @@
             !!!! Передаваемый flux должен реализовывать метод emit для генерации событий, потому что именно его и будет вызывать Jazzy !!!!
         </p>
         
-        <h2>Пример</h2>
+        <h2>Использование</h2>
+        <p>Для начала вам нужна css3 анимация. Можно ее описать либо взять готовую, например из animate.css. У меня уже есть готовая анимация.</p>
+        <pre>
+            @keyframes showLeft {
+                0% {
+                    animation-timing-function: ease;
+                    opacity: 0;
+                    left: -500px;
+                }
+                100% {
+                    animation-timing-function: ease;
+                    opacity: 1;
+                    left: 0px;
+                }
+            }
+        </pre>
+        <p>
+            Теперь нужно ее подключить к html элементу на странице для этого я использую следующий код
+        </p>
+        <pre>
+            var animation = Jazzy.createAnimation({
+                el: document.getElementById("my_simple_animated_element"),
+                name: "showLeft"
+            });
+            
+            animation.showLeft(); // запустим анимацию
+        </pre>
+        <p>
+            Приведенный выше код можно расширить указав все необязательные параметры.
+        </p>
+        <pre>
+            var simpleCreate = Jazzy.createAnimation({
+                el: document.getElementById("my_simple_animated_element"),
+                name: "show",
+                state: "show",
+                animationName: "showLeft",
+                restart: true,
+                flux: flux,
+                delay: 0
+            });
+        </pre>
+        <ul>
+            <li>name - имя свойства для вызова анимации -> simpleCreate.show()</li>
+            <li>state - имя метода который будет вызван сразу по создания анимации -> simpleCreate.showLeft()</li>
+            <li>showLeft - название анимации описанное в css -> @keyframes showLeft</li>
+            <li>restart - разрешать или нет перезапуск</li>
+            <li>flux - поток на котором будут генерироваться события во время выполнения анимации</li>
+            <li>delay - задержка перед выполнения анимации</li>
+        </ul>
+        
+        <h2>Продвинутое еспользование</h2>
         <p>
             Рассмотрим на примере каким образом пользоваться плагином на продвинутом уровне. Предположим нам нужно сделать анимацию для показа уведомления ( alert ). Т.е. анимацию для обычного alert.
         </p>

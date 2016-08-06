@@ -29,3 +29,51 @@ Animate.css предоставляет вам массу готовых аним
 (1)!!!! Jazzy не поддерживает задежки в css3! т.е. при использовании Jazzy в случае если нужна задержка перед воспроизведение анимации используйте специальное свойство delay !!!!
 
 !!!! Передаваемый flux должен реализовывать метод emit для генерации событий, потому что именно его и будет вызывать Jazzy !!!!
+
+#### Использование
+
+Для начала вам нужна css3 анимация. Можно ее описать либо взять готовую, например из animate.css. У меня уже есть готовая анимация.
+```
+@keyframes showLeft {
+    0% {
+        animation-timing-function: ease;
+        opacity: 0;
+        left: -500px;
+    }
+    100% {
+        animation-timing-function: ease;
+        opacity: 1;
+        left: 0px;
+    }
+}
+```
+Теперь нужно ее подключить к html элементу на странице для этого я использую следующий код
+
+```
+var animation = Jazzy.createAnimation({
+    el: document.getElementById("my_simple_animated_element"),
+    name: "showLeft"
+});
+
+animation.showLeft();
+```
+Приведенный выше код можно расширить указав все необязательные параметры.
+
+```
+var simpleCreate = Jazzy.createAnimation({
+    el: document.getElementById("my_simple_animated_element"),
+    name: "show",
+    state: "show",
+    animationName: "showLeft",
+    restart: true,
+    flux: flux,
+    delay: 0
+});
+```
+
+1. name - имя свойства для вызова анимации -> simpleCreate.show()
+2. state - имя метода который будет вызван сразу по создания анимации -> simpleCreate.showLeft()
+3. showLeft - название анимации описанное в css -> @keyframes showLeft
+4. restart - разрешать или нет перезапуск
+5. flux - поток на котором будут генерироваться события во время выполнения анимации
+6. delay - задержка перед выполнения анимации

@@ -69,8 +69,7 @@ hr {
   display: none !important;
 }
 .events {
-    max-height: 206px;
-    overflow: auto;
+
 }
 .col-half {
     float: left;
@@ -95,6 +94,8 @@ hr {
     margin: 0;
     padding: 0;
     list-style: none;
+    max-height: 182px;
+    overflow: auto;
 }
 .code {
     background: #fff none repeat scroll 0 0;

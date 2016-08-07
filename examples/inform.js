@@ -1,18 +1,36 @@
-var events = document.getElementsByClassName("events")[0],
-    log = events.getElementsByClassName("events-log")[0],
-    buttonClear = events.getElementsByClassName("clear-log")[0];
+var events = document.getElementsByClassName("events"),
+    consoleSimpleUse = events[0].getElementsByClassName("events-log")[0],
+    buttonClearSimpleUse = events[0].getElementsByClassName("clear-log")[0],
+    consoleAdvancedUse = events[1].getElementsByClassName("events-log")[0],
+    buttonClearAdvanceUse = events[1].getElementsByClassName("clear-log")[0];
 
-function inform( message ) {
-    var li = document.createElement("LI");
-    li.innerHTML = message;
-    log.appendChild(li);
-}
+var Inform = (function() {
+    function Inform( console ) {
+    
+        this.log = log;
+        this.clear = clear;
 
-inform.clear = function() {
-    log.innerHTML = "";
-}
+        function log( message ) {
+            var li = document.createElement("LI");
+            li.innerHTML = message;
+            console.appendChild(li);
+        }
+        function clear() {
+            console.innerHTML = "";
+        }
+    }
+    Inform.create = function( console, button ) {
+        var logger = new Inform( console );
+        button
+            .addEventListener("click", function(e) {
+                logger.clear();
+            });
+        return logger;
+    }
+    return Inform;
+})();
 
-buttonClear
-    .addEventListener("click", function(e) {
-        inform.clear();
-    });
+
+
+var loggerSimpleUse = Inform.create(consoleSimpleUse, buttonClearSimpleUse),
+    loggerAdvanceUse = Inform.create(consoleAdvancedUse, buttonClearAdvanceUse);
